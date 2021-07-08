@@ -1,0 +1,21 @@
+version: "3.9"
+
+services:
+  server:
+    build:
+      context: .
+      dockerfile: ./compose/local/server/Dockerfile
+    image: mern_server
+    volumes:
+      - ./server:/app
+    ports:
+      - "4000:4000"
+    networks:
+      - mern-net
+    restart: unless-stopped
+    tty: true
+
+networks:
+  mern-net:
+    name: mern-net
+    driver: bridge

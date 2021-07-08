@@ -1,0 +1,13 @@
+{
+	"folders": [
+		{
+			"path": "./server",
+			"name": "SERVER"
+		},
+		{
+			"path": "./compose",
+			"name": "COMPOSE"
+		}
+	],
+	"settings": {}
+}
