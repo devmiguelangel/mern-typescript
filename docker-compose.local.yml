@@ -1,19 +1,40 @@
 version: "3.9"
 
+volumes:
+  local_db_data: {}
+
 services:
   server:
     build:
       context: .
       dockerfile: ./compose/local/server/Dockerfile
-    image: mern_server
+    image: mern_local_server
+    env_file:
+      - ./compose/.env/mongodb.env
     volumes:
       - ./server:/app
     ports:
       - "4000:4000"
     networks:
       - mern-net
+    depends_on:
+      - db
     restart: unless-stopped
     tty: true
+
+  db:
+    build:
+      context: .
+      dockerfile: ./compose/prod/db/Dockerfile
+    image: mern_local_db
+    env_file:
+      - ./compose/.env/mongodb.env
+    volumes:
+      - local_db_data:/data/db
+    ports:
+      - 27017:27017
+    networks:
+      - mern-net
 
 networks:
   mern-net:
