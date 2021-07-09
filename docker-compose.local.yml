@@ -22,6 +22,18 @@ services:
     restart: unless-stopped
     tty: true
 
+  client:
+    build:
+      context: .
+      dockerfile: ./compose/local/client/Dockerfile
+    image: mern_local_client
+    volumes:
+      - ./client:/app
+    networks:
+      - mern-net
+    restart: unless-stopped
+    tty: true
+
   db:
     build:
       context: .

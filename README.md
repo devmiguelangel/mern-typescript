@@ -123,3 +123,127 @@ yarn add eslint prettier @typescript-eslint/eslint-plugin eslint-config-airbnb-b
 ```sh
 build
 ```
+
+## CLIENT
+### Dependencies
+```sh
+yarn add react react-dom --latest --exact
+yarn add typescript @types/react @types/react-dom -D --latest --exact
+yarn add @babel/core @babel/cli @babel/preset-env @babel/preset-typescript @babel/preset-react -D --latest --exact
+yarn add @babel/runtime @babel/plugin-transform-runtime -D --latest --exact
+yarn add webpack webpack-cli webpack-dev-server style-loader css-loader babel-loader html-webpack-plugin clean-webpack-plugin -D --latest --exact
+yarn add prettier eslint-config-prettier eslint-plugin-prettier -D --latest --exact
+yarn add \
+  eslint \
+  eslint-plugin-react \
+  eslint-plugin-react-hooks \
+  @typescript-eslint/parser \
+  @typescript-eslint/eslint-plugin \
+  eslint-plugin-jsx-a11y \
+  eslint-plugin-import \
+  eslint-import-resolver-typescript \
+  eslint-plugin-eslint-comments -D --latest --exact
+```
+
+### Configuration
+- tsconfig.json
+```json
+{
+  "compilerOptions": {
+    "target": "es5",
+    "module": "ESNext",
+    "lib": [
+      "DOM",
+      "ESNext"
+    ],
+    "allowJs": true,
+    "checkJs": true,
+    "jsx": "react-jsx",
+    "noEmit": true,
+    "isolatedModules": true,
+    "strict": true,
+    "moduleResolution": "node",
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "resolveJsonModule": true
+  },
+  "include": [
+    "src/**/*"
+  ],
+  "exclude": ["node_modules", "dist"]
+}
+```
+
+- .eslintrc.json
+```json
+{
+    "parser": "@typescript-eslint/parser",
+    "parserOptions": {
+        "ecmaVersion": 2021,
+        "sourceType": "module",
+        "ecmaFeatures": {
+            "jsx": true // Allows for the parsing of JSX
+        }
+    },
+    "settings": {
+        "react": {
+            "version": "detect"
+        },
+        "import/resolver": {
+            "typescript": {}
+        }
+    },
+    "extends": [
+        "plugin:react/recommended",
+        "plugin:react-hooks/recommended",
+        "plugin:@typescript-eslint/recommended",
+        "plugin:import/errors",
+        "plugin:import/warnings",
+        "plugin:import/typescript",
+        "plugin:jsx-a11y/recommended",
+        "plugin:eslint-comments/recommended",
+        // "prettier/@typescript-eslint",
+        "plugin:prettier/recommended" //should be at the last
+    ],
+    "rules": {
+        "no-unused-vars": "off",
+        "@typescript-eslint/no-unused-vars": ["error"],
+        "@typescript-eslint/no-var-requires": "off",
+        "react-hooks/rules-of-hooks": "error",
+        "react-hooks/exhaustive-deps": "warn",
+        "react/prop-types": "off",
+        "react/jsx-uses-react": "off",
+        "react/react-in-jsx-scope": "off",
+        "@typescript-eslint/explicit-module-boundary-types": "off",
+        "react/jsx-filename-extension": [ "warn", {"extensions": [".tsx"]} ],
+        "import/extensions": [
+            "error",
+            "ignorePackages",
+            {
+                "ts": "never",
+                "tsx": "never"
+            }
+        ],
+        "@typescript-eslint/explicit-function-return-type": [
+            "error",
+            {
+                "allowExpressions": true
+            }
+        ]
+    }
+}
+```
+
+- .prettierrc.json
+```json
+{
+  "semi": true,
+  "trailingComma": "all",
+  "jsxSingleQuote": false,
+  "singleQuote": true,
+  "printWidth": 120,
+  "tabWidth": 2
+}
+```
+

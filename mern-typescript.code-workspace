@@ -5,6 +5,10 @@
 			"name": "SERVER"
 		},
 		{
+			"path": "./client",
+			"name": "CLIENT"
+		},
+		{
 			"path": "./compose",
 			"name": "COMPOSE"
 		}
