@@ -19,6 +19,7 @@ services:
       - mern-net
     depends_on:
       - db
+      - client
     restart: unless-stopped
     tty: true
 
@@ -29,6 +30,7 @@ services:
     image: mern_local_client
     volumes:
       - ./client:/app
+      - ./server/src/public:/app/dist
     networks:
       - mern-net
     restart: unless-stopped
